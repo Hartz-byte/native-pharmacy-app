@@ -1,11 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View } from "react-native";
+import { useFonts } from "expo-font";
+import SplashScreen from "./Pages/SplashScreen";
+import HomePage from "./Pages/HomePage";
 
 export default function App() {
+  // Baloo Thambi 2 font load
+  const [loaded] = useFonts({
+    Baloo: require("./assets/fonts/BalooThambi2.ttf"),
+  });
+
+  const [showSplash, setShowSplash] = useState(true);
+
+  // setting timer for the splash screen
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!loaded) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      {showSplash ? <SplashScreen /> : <HomePage />}
+      {/* <SplashScreen /> */}
+      {/* <HomePage /> */}
     </View>
   );
 }
@@ -13,8 +37,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
