@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useFonts } from "expo-font";
 import SplashScreen from "./Pages/SplashScreen";
-import HomePage from "./Pages/HomePage";
+import LoginPage from "./Pages/LoginPage";
 
 export default function App() {
   // Baloo Thambi 2 font load
@@ -27,9 +27,9 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {showSplash ? <SplashScreen /> : <HomePage />}
+      {showSplash ? <SplashScreen /> : <LoginPage />}
       {/* <SplashScreen /> */}
-      {/* <HomePage /> */}
+      {/* <LoginPage /> */}
     </View>
   );
 }
