@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
 import SplashScreen from "./src/Screens/SplashScreen";
 import LoginScreen from "./src/Screens/LoginScreen";
 import HomeScreen from "./src/Screens/HomeScreen";
+import LoadingScreen from "./src/Screens/LoadingScreen";
 
 import { useContext } from "react";
 import { AuthContext, AuthContextProvider } from "./src/Firebase/AuthContext";
@@ -50,11 +51,11 @@ export default function App() {
     <AuthContextProvider>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {showSplash ? (
+          {/* {showSplash ? (
             <Stack.Screen name="Splash" component={SplashScreen} />
           ) : (
             <Stack.Screen name="Login" component={LoginScreen} />
-          )}
+          )} */}
           {/* <Stack.Screen
             name="HomePage"
             component={<ProtectedRoute>HomePage</ProtectedRoute>}
