@@ -1,22 +1,50 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { TextInput, Provider } from "react-native-paper";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { useNavigation } from "@react-navigation/native";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../Firebase/FirebaseConfig";
+import Loading from "./LoadingScreen";
 
-const LoginPage = () => {
+const LoginScreen = () => {
   const [email, setEmail] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // Email validation logic
-  const handleEmailChange = (text) => {
-    setEmail(text);
-    setIsValidEmail(validateEmail(text));
+  const navigation = useNavigation();
+
+  const signIn = async (e) => {
+    try {
+      setLoading(true);
+      await signInWithEmailAndPassword(auth, email, password);
+      setLoading(false);
+      navigation.navigate("HomeScreen");
+    } catch (err) {
+      setLoading(false);
+      alert("Invalid Credentials!");
+    }
   };
 
-  // Email validation
-  const validateEmail = (email) => {
-    return /\S+@\S+\.\S+/.test(email);
-  };
+  // const singUp = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const response = await createUserWithEmailAndPassword(
+  //       auth,
+  //       email,
+  //       password
+  //     );
+  //     console.log(response);
+  //     alert("Check your email.");
+  //   } catch (error) {
+  //     console.error(error);
+  //     alert("Sign Up Failed:" + error.message);
+  //   }
+  // };
+
+  // Loading component if loading state is true
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <Provider>
@@ -31,7 +59,7 @@ const LoginPage = () => {
           style={styles.emailInput}
           keyboardType="email-address"
           value={email}
-          onChangeText={handleEmailChange}
+          onChangeText={(text) => setEmail(text)}
           theme={{
             colors: {
               primary: "#000000",
@@ -41,11 +69,6 @@ const LoginPage = () => {
           }}
           // left={<TextInput.Icon name="email" />}
         />
-        {!isValidEmail && (
-          <Text style={styles.errorText}>
-            Please enter a valid email address
-          </Text>
-        )}
 
         {/* password input field */}
         <TextInput
@@ -53,6 +76,8 @@ const LoginPage = () => {
           mode="outlined"
           style={styles.passInput}
           secureTextEntry={true}
+          value={password}
+          onChangeText={(text) => setPassword(text)}
           theme={{
             colors: {
               primary: "#000000",
@@ -80,7 +105,7 @@ const LoginPage = () => {
         </View>
 
         {/* Login button */}
-        <TouchableOpacity style={styles.loginButton}>
+        <TouchableOpacity style={styles.loginButton} onPress={signIn}>
           <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
       </View>
@@ -93,6 +118,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     marginTop: 45,
+    backgroundColor: "white",
   },
   loginText: {
     fontFamily: "Baloo",
@@ -167,4 +193,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginPage;
+export default LoginScreen;
