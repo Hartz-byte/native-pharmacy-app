@@ -51,11 +51,11 @@ export default function App() {
     <AuthContextProvider>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {/* {showSplash ? (
+          {showSplash ? (
             <Stack.Screen name="Splash" component={SplashScreen} />
           ) : (
             <Stack.Screen name="Login" component={LoginScreen} />
-          )} */}
+          )}
           {/* <Stack.Screen
             name="HomePage"
             component={<ProtectedRoute>HomePage</ProtectedRoute>}
