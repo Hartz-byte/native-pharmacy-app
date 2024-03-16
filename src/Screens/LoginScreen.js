@@ -4,7 +4,7 @@ import { TextInput, Provider } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Firebase/FirebaseConfig";
-import Loading from "./LoadingScreen";
+import LoadingScreen from "./LoadingScreen";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -43,7 +43,7 @@ const LoginScreen = () => {
 
   // Loading component if loading state is true
   if (loading) {
-    return <Loading />;
+    return <LoadingScreen />;
   }
 
   return (
