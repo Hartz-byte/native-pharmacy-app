@@ -7,7 +7,6 @@ import SplashScreen from "./src/Screens/SplashScreen";
 import LoginScreen from "./src/Screens/LoginScreen";
 import HomeScreen from "./src/Screens/HomeScreen";
 import LoadingScreen from "./src/Screens/LoadingScreen";
-
 import { useContext } from "react";
 import { AuthContext, AuthContextProvider } from "./src/Firebase/AuthContext";
 

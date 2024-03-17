@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -16,10 +16,52 @@ import {
   faArrowUpFromBracket,
   faLink,
 } from "@fortawesome/free-solid-svg-icons";
+import * as ImagePicker from "expo-image-picker";
 import Pic1 from "../../assets/Icons/Pic1.png";
 import Pic2 from "../../assets/Icons/Pic2.png";
 
 const NearbyPharmacy = () => {
+  const [image, setImage] = useState(null);
+
+  const handleUpload = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: false,
+        quality: 1,
+      });
+
+      if (!result.cancelled) {
+        setImage(result.uri);
+        const data = new FormData();
+        data.append("file", {
+          uri: result.uri,
+          type: "image/jpeg",
+          name: "image.jpg",
+        });
+        data.append("upload_preset", "pharmacyApp");
+        data.append("cloud_name", "dg7ecqj6l");
+
+        const response = await fetch(
+          "https://api.cloudinary.com/v1_1/dg7ecqj6l/image/upload",
+          {
+            method: "POST",
+            body: data,
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to upload image");
+        }
+
+        const responseData = await response.json();
+        console.log(responseData);
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error.message);
+    }
+  };
+
   return (
     <SafeAreaView style={{ backgroundColor: "white" }}>
       <ScrollView style={styles.mainContainer}>
@@ -143,6 +185,8 @@ const NearbyPharmacy = () => {
           {/* upload file */}
           <TouchableOpacity
             style={{ justifyContent: "center", alignItems: "center" }}
+            // onPress={handleUpload}
+            onPress={() => handleUpload(false)}
           >
             <FontAwesomeIcon icon={faArrowUpFromBracket} size={50} />
             <Text style={styles.uploadText}>Upload File</Text>
