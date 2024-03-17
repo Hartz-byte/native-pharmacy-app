@@ -133,20 +133,20 @@ const NearbyPharmacy = () => {
         {/* upload box */}
         <View style={styles.uploadBox}>
           {/* upload link */}
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <TouchableOpacity>
-              <FontAwesomeIcon icon={faLink} size={50} />
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={{ justifyContent: "center", alignItems: "center" }}
+          >
+            <FontAwesomeIcon icon={faLink} size={50} />
             <Text style={styles.uploadText}>Upload Link</Text>
-          </View>
+          </TouchableOpacity>
 
           {/* upload file */}
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <TouchableOpacity>
-              <FontAwesomeIcon icon={faArrowUpFromBracket} size={50} />
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={{ justifyContent: "center", alignItems: "center" }}
+          >
+            <FontAwesomeIcon icon={faArrowUpFromBracket} size={50} />
             <Text style={styles.uploadText}>Upload File</Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         {/* continue button */}
