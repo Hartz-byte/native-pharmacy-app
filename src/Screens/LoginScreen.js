@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput, Provider } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -47,69 +54,75 @@ const LoginScreen = () => {
   }
 
   return (
-    <Provider>
-      <View style={styles.container}>
-        <Text style={styles.loginText}>LOGIN</Text>
-        <Text style={styles.healthcareText}>Healthcare</Text>
+    <SafeAreaView style={{ backgroundColor: "white" }}>
+      <ScrollView>
+        <Provider>
+          <View style={styles.container}>
+            <Text style={styles.loginText}>LOGIN</Text>
+            <Text style={styles.healthcareText}>Healthcare</Text>
 
-        {/* email input field */}
-        <TextInput
-          label="Email Id"
-          mode="outlined"
-          style={styles.emailInput}
-          keyboardType="email-address"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          theme={{
-            colors: {
-              primary: "#000000",
-              placeholder: "#000000",
-            },
-            roundness: 10,
-          }}
-          // left={<TextInput.Icon name="email" />}
-        />
+            {/* email input field */}
+            <TextInput
+              label="Email Id"
+              mode="outlined"
+              style={styles.emailInput}
+              keyboardType="email-address"
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+              theme={{
+                colors: {
+                  primary: "#000000",
+                  placeholder: "#000000",
+                },
+                roundness: 10,
+              }}
+              // left={<TextInput.Icon name="email" />}
+            />
 
-        {/* password input field */}
-        <TextInput
-          label="Password"
-          mode="outlined"
-          style={styles.passInput}
-          secureTextEntry={true}
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          theme={{
-            colors: {
-              primary: "#000000",
-              placeholder: "#000000",
-            },
-            roundness: 10,
-          }}
-          // left={<TextInput.Icon name="lock" />}
-        />
+            {/* password input field */}
+            <TextInput
+              label="Password"
+              mode="outlined"
+              style={styles.passInput}
+              secureTextEntry={true}
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+              theme={{
+                colors: {
+                  primary: "#000000",
+                  placeholder: "#000000",
+                },
+                roundness: 10,
+              }}
+              // left={<TextInput.Icon name="lock" />}
+            />
 
-        {/* Forgot password text */}
-        <TouchableOpacity
-          style={styles.forgotPasswordContainer}
-          onPress={() => console.log("Forgot password clicked")}
-        >
-          <Text style={styles.forgotPasswordText}>Forgot Password !</Text>
-        </TouchableOpacity>
+            {/* Forgot password text */}
+            <TouchableOpacity
+              style={styles.forgotPasswordContainer}
+              onPress={() => console.log("Forgot password clicked")}
+            >
+              <Text style={styles.forgotPasswordText}>Forgot Password !</Text>
+            </TouchableOpacity>
 
-        {/* Register text */}
-        <View style={styles.registerContainer}>
-          <Text style={styles.accountText}>Don't Have an Account : </Text>
-          <TouchableOpacity onPress={() => console.log("Register clicked")}>
-            <Text style={styles.registerLinkText}>Click here to register</Text>
-          </TouchableOpacity>
-        </View>
+            {/* Register text */}
+            <View style={styles.registerContainer}>
+              <Text style={styles.accountText}>Don't Have an Account : </Text>
+              <TouchableOpacity onPress={() => console.log("Register clicked")}>
+                <Text style={styles.registerLinkText}>
+                  Click here to register
+                </Text>
+              </TouchableOpacity>
+            </View>
 
-        {/* Login button */}
-        <TouchableOpacity style={styles.loginButton} onPress={signIn}>
-          <Text style={styles.loginButtonText}>Login</Text>
-        </TouchableOpacity>
-      </View>
-    </Provider>
+            {/* Login button */}
+            <TouchableOpacity style={styles.loginButton} onPress={signIn}>
+              <Text style={styles.loginButtonText}>Login</Text>
+            </TouchableOpacity>
+          </View>
+        </Provider>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
